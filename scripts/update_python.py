@@ -19,6 +19,10 @@ macOS recipe:
   1. Clone cpython
   2. Use homebrew to install and configure openssl (for static linking!)
   3. Build cpython from source and use `make install` to create archive.
+
+Raspberry Pi Debian 12 (Bookworm):
+  1. Before calling this script, run "sudo apt install libssl-dev", or otherwise
+     Python won't be able to use SSL.
 """
 
 import glob
@@ -98,7 +102,7 @@ def build_python():
         check_call(['brew', 'install', 'openssl', 'xz', 'pkg-config'])
         if platform.machine() == 'x86_64':
             prefix = '/usr/local'
-            min_macos_version = '10.11'
+            min_macos_version = '10.13'
         elif platform.machine() == 'arm64':
             prefix = '/opt/homebrew'
             min_macos_version = '11.0'
